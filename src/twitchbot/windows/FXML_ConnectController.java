@@ -12,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import twitchbot.TwitchBot;
 
 /**
  * FXML Controller class
@@ -36,9 +35,10 @@ public class FXML_ConnectController implements Initializable {
     private void handleButtonAction(ActionEvent event)
     {
         String ip = textIP.getText();
-        String pw = textPort.getText();
+        String port = textPort.getText();
+        int portNum =Integer.getInteger(port);
         String authcode = textAuthCode.getText();
-        
+        main.connect(ip,portNum,authcode);
         Stage stage = (Stage)textAuthCode.getScene().getWindow();
         stage.close();
     }
