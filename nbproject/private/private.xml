@@ -3,13 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/H:/Dokumente/NetBeansProjects/twitchBot/src/twitchbot/FXMLDocumentController.java</file>
-            <file>file:/H:/Dokumente/NetBeansProjects/twitchBot/src/twitchbot/FXMLDocument.fxml</file>
-            <file>file:/H:/Dokumente/NetBeansProjects/twitchBot/src/twitchbot/TwitchBot.java</file>
-            <file>file:/H:/Dokumente/NetBeansProjects/twitchBot/src/twitchbot/ircClient.java</file>
-            <file>file:/H:/Dokumente/NetBeansProjects/twitchBot/src/AbiturKlassen/Client.java</file>
-            <file>file:/H:/Dokumente/NetBeansProjects/twitchBot/src/AbiturKlassen/List.java</file>
-            <file>file:/H:/Dokumente/NetBeansProjects/twitchBot/src/AbiturKlassen/Connection.java</file>
+            <file>file:/C:/Users/Jakob/Documents/NetBeansProjects/twitchBot/src/twitchbot/windows/FXML_Login.fxml</file>
+            <file>file:/C:/Users/Jakob/Documents/NetBeansProjects/twitchBot/src/AbiturKlassen/Client.java</file>
+            <file>file:/C:/Users/Jakob/Documents/NetBeansProjects/twitchBot/src/twitchbot/windows/FXML_Chat.fxml</file>
+            <file>file:/C:/Users/Jakob/Documents/NetBeansProjects/twitchBot/src/twitchbot/windows/TwitchBot.java</file>
+            <file>file:/C:/Users/Jakob/Documents/NetBeansProjects/twitchBot/src/twitchbot/ircClient.java</file>
+            <file>file:/C:/Users/Jakob/Documents/NetBeansProjects/twitchBot/src/twitchbot/windows/FXML_LoginController.java</file>
+            <file>file:/C:/Users/Jakob/Documents/NetBeansProjects/twitchBot/src/twitchbot/windows/FXML_Connect.fxml</file>
+            <file>file:/C:/Users/Jakob/Documents/NetBeansProjects/twitchBot/src/twitchbot/windows/FXML_ChatController.java</file>
+            <file>file:/C:/Users/Jakob/Documents/NetBeansProjects/twitchBot/src/twitchbot/windows/FXML_ConnectController.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,16 +1,26 @@
 package twitchbot;
 
 import AbiturKlassen.Client;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ircClient extends Client
 {
     private String ClientID = "nhtjgrmje2p662nifmn8u4fnp6i16af";
+    
     public ircClient(String pIPAdresse, int pPortNr, String username, String authToken)
     {
         super(pIPAdresse, pPortNr);
-        //this.send("PASS oauth:" + authToken);
-        //this.send("NICK " + username);
         System.out.println("connecting");
+        while(!istVerbunden())
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ircClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        System.out.println("connected");
+        this.send("NICK "+username);
+        
     }
     private void pong(String pMessage)
     {

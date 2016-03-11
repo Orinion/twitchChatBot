@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -23,8 +24,16 @@
          <center>
             <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
-                <Tab text="General" />
-                <Tab fx:id="newTab" onSelectionChanged="#handleNewTab" text="+" />
+                <Tab text="General">
+                     <content>
+                        <TextArea prefHeight="200.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+                <Tab fx:id="newTab" onSelectionChanged="#handleNewTab" text="+">
+                     <content>
+                        <TextArea prefHeight="200.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
               </tabs>
             </TabPane>
          </center>
