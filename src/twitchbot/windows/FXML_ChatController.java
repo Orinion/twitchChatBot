@@ -5,6 +5,7 @@
  */
 package twitchbot.windows;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -36,17 +37,19 @@ public class FXML_ChatController implements Initializable {
     private Tab newTab;
     @FXML
     void handleButtonAction(ActionEvent event) {
-        main.myClient.send(textInput.getText());
+        String chanelName = tabPane.getSelectionModel().getSelectedItem().getText();
+        main.myClient.sendChat(chanelName,textInput.getText());
     }
     
         @FXML
-    void handleNewTab(Event event) {
+    void handleNewTab(Event event) 
+    {
         if(newTab.isSelected())
-            this.addTab(textInput.getText());
+        this.addTab(textInput.getText());
     }
     private Tab getTab(String tabName)
     {
-        Tab[] array= (Tab[]) tabPane.getTabs().toArray();
+        Tab[] array= tabPane.getTabs().toArray(new Tab[ tabPane.getTabs().size()]);
         for (int i = 0; i < array.length; i++) {
             if(array[i].getText().equals(tabName))
                 return array[i];
@@ -56,8 +59,11 @@ public class FXML_ChatController implements Initializable {
     
     public Tab addTab(String tab)
     {
+        tabPane.getSelectionModel().clearSelection();
         if(getTab(tab)!=null)
             return getTab(tab);
+        myClient.joinChat(tab);
+        
         Tab addedTab = new Tab(tab);
         addedTab.setContent(new TextArea());
         tabPane.getTabs().remove(newTab);
@@ -70,7 +76,8 @@ public class FXML_ChatController implements Initializable {
     {
         Tab act = getTab(tab);
         if(act!=null)
-            tabPane.getTabs().remove(act); 
+            tabPane.getTabs().remove(act);
+        myClient.leaveChat(tab);
     }
     public void printMessage(String tab,String message)
     {
@@ -83,6 +90,7 @@ public class FXML_ChatController implements Initializable {
     public void setMain(TwitchBot main)
     {
         this.main = main;
+        myClient = main.myClient;
     }
     /**
      * Initializes the controller class.

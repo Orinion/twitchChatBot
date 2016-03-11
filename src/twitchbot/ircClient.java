@@ -25,6 +25,20 @@ public class ircClient extends Client
     {
         this.send(pMessage.replace("PING", "PONG"));
     }
+    
+    public void sendChat(String chanelName,String message)
+    {
+        this.send("PRIVMSG #"+chanelName+" :"+message);
+    }
+    public void joinChat(String chanelName)
+    {
+        this.send("JOIN #"+chanelName);
+    }
+     public void leaveChat(String chanelName)
+    {
+        this.send("PART #"+chanelName);
+    }
+    
     @Override
     public void send(String pMessage)
     {
