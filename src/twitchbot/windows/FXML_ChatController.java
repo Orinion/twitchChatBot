@@ -54,23 +54,21 @@ public class FXML_ChatController implements Initializable {
     private Tab getTab(String tabName)
     {
         Tab[] array= tabPane.getTabs().toArray(new Tab[ tabPane.getTabs().size()]);
-        for (Tab array1 : array) {
+        for (Tab array1 : array) 
             if (array1.getText().equals(tabName))
                 return array1;
-            
-        }
         return null;
     }
     
     public Tab addTab(String neuerTab)
     {
-        tabPane.getSelectionModel().clearSelection();
+        
         if(getTab(neuerTab)!=null)
             return getTab(neuerTab);
+        tabPane.getSelectionModel().clearSelection();
         myClient.joinChat(neuerTab);
-        
         Tab addedTab = new Tab(neuerTab);
-        TextArea newTxtArea = new TextArea();
+        TextArea newTxtArea = new TextArea(">"+neuerTab);
         newTxtArea.setEditable(false);
         newTxtArea.wrapTextProperty().set(true);
         addedTab.setContent(newTxtArea);
@@ -89,7 +87,9 @@ public class FXML_ChatController implements Initializable {
     }
     public void printMessage(String tab,String message)
     {
-        Tab act = addTab(tab);
+        Tab act = getTab(tab);
+        if(act == null)
+            act =addTab(tab);
         TextArea txtArea = (TextArea)act.getContent();
         txtArea.appendText("\n"+message);
         

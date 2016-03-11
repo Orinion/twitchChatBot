@@ -47,13 +47,29 @@ public class ircClient extends Client
     @Override
     public void send(String pMessage)
     {
-        System.out.println("<"+pMessage);
+        pMessage.replace("ä","Ã¤");
+        pMessage.replace( "Ä", "Ã„");
+        pMessage.replace("ö", "Ã¶");
+        pMessage.replace("Ö", "Ã–");
+        pMessage.replace("ü", "Ã¼");
+        pMessage.replace("Ü", "Ãœ");
+        pMessage.replace("ß", "ÃŸ");
+        //System.out.println("<"+pMessage);
         super.send(pMessage);
     }
     @Override
     public void processMessage(String pMessage)
     {
-        System.out.println(">"+pMessage);
+        pMessage.replace("Ã¤", "ä");
+        pMessage.replace("Ã„", "Ä");
+        pMessage.replace("Ã¶", "ö");
+        pMessage.replace("Ã–", "Ö");
+        pMessage.replace("Ã¼", "ü");
+        pMessage.replace("Ãœ", "Ü");
+        pMessage.replace("ÃŸ", "ß");
+        
+        
+        //System.out.println(">"+pMessage);
         if(pMessage.contains("PING"))
             this.pong(pMessage);     
         else
