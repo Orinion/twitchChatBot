@@ -39,33 +39,41 @@ public class FXML_ChatController implements Initializable {
     void handleButtonAction(ActionEvent event) {
         String chanelName = tabPane.getSelectionModel().getSelectedItem().getText();
         main.myClient.sendChat(chanelName,textInput.getText());
+        printMessage(chanelName,textInput.getText());
+        textInput.setText("");
     }
     
         @FXML
     void handleNewTab(Event event) 
     {
-        if(newTab.isSelected())
+        if(!newTab.isSelected())
+            return;
         this.addTab(textInput.getText());
+        textInput.setText("");
     }
     private Tab getTab(String tabName)
     {
         Tab[] array= tabPane.getTabs().toArray(new Tab[ tabPane.getTabs().size()]);
-        for (int i = 0; i < array.length; i++) {
-            if(array[i].getText().equals(tabName))
-                return array[i];
+        for (Tab array1 : array) {
+            if (array1.getText().equals(tabName))
+                return array1;
+            
         }
         return null;
     }
     
-    public Tab addTab(String tab)
+    public Tab addTab(String neuerTab)
     {
         tabPane.getSelectionModel().clearSelection();
-        if(getTab(tab)!=null)
-            return getTab(tab);
-        myClient.joinChat(tab);
+        if(getTab(neuerTab)!=null)
+            return getTab(neuerTab);
+        myClient.joinChat(neuerTab);
         
-        Tab addedTab = new Tab(tab);
-        addedTab.setContent(new TextArea());
+        Tab addedTab = new Tab(neuerTab);
+        TextArea newTxtArea = new TextArea();
+        newTxtArea.setEditable(false);
+        newTxtArea.wrapTextProperty().set(true);
+        addedTab.setContent(newTxtArea);
         tabPane.getTabs().remove(newTab);
         tabPane.getTabs().add(addedTab);
         tabPane.getSelectionModel().select(addedTab);
@@ -81,16 +89,17 @@ public class FXML_ChatController implements Initializable {
     }
     public void printMessage(String tab,String message)
     {
-        Tab act = getTab(tab);
-        if(act == null)
-            act =addTab(tab);
+        Tab act = addTab(tab);
         TextArea txtArea = (TextArea)act.getContent();
-        txtArea.setText(txtArea.getText()+"\n"+message);
+        txtArea.appendText("\n"+message);
+        
+        //Scroll to bottom
     }
     public void setMain(TwitchBot main)
     {
         this.main = main;
         myClient = main.myClient;
+        myClient.chatController = this;
     }
     /**
      * Initializes the controller class.
