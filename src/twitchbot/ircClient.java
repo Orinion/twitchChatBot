@@ -19,7 +19,8 @@ public class ircClient extends Client
                 Logger.getLogger(ircClient.class.getName()).log(Level.SEVERE, null, ex);
             }
         System.out.println("connected");
-        this.send("NICK "+username);
+        this.send("PASS oauth:"+authToken);
+        this.send("NICK "+username.toLowerCase());
         
     }
     private void pong(String pMessage)
@@ -37,6 +38,7 @@ public class ircClient extends Client
     {
         if(pMessage.contains("PING"))
             this.pong(pMessage);
+
         System.out.println(pMessage);
         
     }
