@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65" fx:controller="twitchbot.windows.FXML_LoginController">
+<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="twitchbot.windows.FXML_LoginController">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="320.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -18,13 +18,7 @@
                   <TextField fx:id="textUsername" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-                  <TextField fx:id="textPassword" />
-               </children>
-            </HBox>
-            <Button fx:id="loginbutton" mnemonicParsing="false" onAction="#handleButtonAction" text="Button" />
+            <Button fx:id="loginbutton" mnemonicParsing="false" onAction="#handleButtonAction" text="Start" />
          </children>
          <opaqueInsets>
             <Insets bottom="20.0" />

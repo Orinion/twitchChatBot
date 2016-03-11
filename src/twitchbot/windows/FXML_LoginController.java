@@ -23,15 +23,12 @@ public class FXML_LoginController implements Initializable
     private TwitchBot main;
     @FXML
     private TextField textUsername;
-    @FXML
-    private TextField textPassword;
 
     @FXML
     private void handleButtonAction(ActionEvent event)
     {
         String username = textUsername.getText();
-        String pw = textPassword.getText();
-        this.main.getAuthtoken(username, pw);
+        this.main.getAuthtoken(username);
         Stage stage = (Stage)textUsername.getScene().getWindow();
         stage.close();
     }

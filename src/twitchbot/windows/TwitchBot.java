@@ -27,7 +27,6 @@ public class TwitchBot extends Application
 {
     public ircClient myClient;
     String Username;
-    String Password;
     @Override
     public void start(Stage stage) throws Exception
     {
@@ -42,10 +41,9 @@ public class TwitchBot extends Application
         
     }
 
-    public void getAuthtoken(String username, String password)
+    public void getAuthtoken(String username)
     {
         this.Username = username;
-        this.Password = password;
         if(!Desktop.isDesktopSupported())
             return;
         try {

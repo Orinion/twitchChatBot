@@ -5,9 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ircClient extends Client
-{
-    private String ClientID = "nhtjgrmje2p662nifmn8u4fnp6i16af";
-    
+{    
     public ircClient(String pIPAdresse, int pPortNr, String username, String authToken)
     {
         super(pIPAdresse, pPortNr);
