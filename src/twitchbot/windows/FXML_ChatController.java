@@ -10,45 +10,48 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import twitchbot.ircClient;
 
 /**
  * FXML Controller class
  *
  * @author Jakob
  */
-public class FXML_ConnectController implements Initializable {
+public class FXML_ChatController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
     private TwitchBot main;
+    private ircClient myClient;
     @FXML
-    private TextField textIP;
+    private TextField textInput;
     @FXML
-    private TextField textPort;
+    private TabPane tabPane;
     @FXML
-    private TextField textAuthCode;
-
+    private Tab newTab;
     @FXML
     private void handleButtonAction(ActionEvent event)
     {
-        String ip = textIP.getText();
-        String port = textPort.getText();
-        int portNum =Integer.parseInt(port);
-        String authcode = textAuthCode.getText();
-        main.connect(ip,portNum,authcode);
-        Stage stage = (Stage)textAuthCode.getScene().getWindow();
-        stage.close();
+        main.myClient.send(textInput.getText());
+    }
+    
+     @FXML
+    private void handleNewTab(ActionEvent event)
+    {
+        //TODO
+        //Create Select and Name new Tab
     }
     public void setMain(TwitchBot main)
     {
         this.main = main;
     }
-    
-      @Override
+    /**
+     * Initializes the controller class.
+     */
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
 }

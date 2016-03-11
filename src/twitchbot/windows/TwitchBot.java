@@ -16,14 +16,16 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import twitchbot.ircClient;
 import twitchbot.windows.FXML_ConnectController;
-
+import java.awt.Desktop;
+import java.net.URI;
+import java.net.URISyntaxException;
 /**
  *
  * @author jakob.greuel
  */
 public class TwitchBot extends Application
 {
-    ircClient myClient;
+    public ircClient myClient;
     String Username;
     String Password;
     @Override
@@ -32,7 +34,7 @@ public class TwitchBot extends Application
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Login.fxml"));
         Parent p = fxmlLoader.load();
         FXML_LoginController controll = (FXML_LoginController)fxmlLoader.getController();
-        controll.initialize(null, null);
+
         controll.setMain(this);
         Scene scene = new Scene(p);
         stage.setScene(scene);
@@ -44,12 +46,24 @@ public class TwitchBot extends Application
     {
         this.Username = username;
         this.Password = password;
+        if(!Desktop.isDesktopSupported())
+            return;
+        try {
+            Desktop.getDesktop().browse(new URI("https://api.twitch.tv/kraken/oauth2/authorize"
+                    + "?response_type=token"
+                    + "&client_id=nhtjgrmje2p662nifmn8u4fnp6i16af"
+                    + "&redirect_uri=https://github.com/Orinion/twitchChatBot/"
+                    + "&scope=chat_login"));
+        } catch (Exception ex) {
+           
+        }
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Connect.fxml"));
         Parent p;
         try {
             p = fxmlLoader.load();
             FXML_ConnectController controll = (FXML_ConnectController)fxmlLoader.getController();
-            controll.initialize(null, null);
+ 
             controll.setMain(this);
             Scene scene = new Scene(p);
             Stage stage = new Stage();
@@ -64,6 +78,20 @@ public class TwitchBot extends Application
     public void connect(String ip,int Port,String authcode)
     {
         myClient = new ircClient(ip, Port,this.Username, authcode);
+          FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Chat.fxml"));
+        Parent p;
+        try {
+            p = fxmlLoader.load();
+            FXML_ChatController controll = (FXML_ChatController)fxmlLoader.getController();
+         
+            controll.setMain(this);
+            Scene scene = new Scene(p);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            
+        }
     }
     /**
      * @param args the command line arguments
