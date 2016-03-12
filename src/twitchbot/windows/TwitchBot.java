@@ -19,6 +19,8 @@ import twitchbot.windows.FXML_ConnectController;
 import java.awt.Desktop;
 import java.net.URI;
 import java.net.URISyntaxException;
+import javafx.event.EventHandler;
+import javafx.stage.WindowEvent;
 /**
  *
  * @author jakob.greuel
@@ -87,6 +89,9 @@ public class TwitchBot extends Application
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
+            stage.setOnCloseRequest((WindowEvent we) -> {
+                myClient.close();
+            });   
         } catch (IOException ex) {
             
         }
