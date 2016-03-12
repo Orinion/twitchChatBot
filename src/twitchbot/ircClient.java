@@ -82,7 +82,7 @@ public class ircClient extends Client
                 String message = pMessage.substring(indexChanelName2+2); 
                 Platform.runLater(new Runnable() {
                  @Override public void run() {
-                     chatController.printMessage(chanelname,username+":"+ message);
+                     chatController.printMessage(chanelname,username,message);
                  }
                 });
                 

@@ -36,7 +36,7 @@ public class FXML_ChatController implements Initializable {
     void handleButtonAction(ActionEvent event) {
         String chanelName = tabPane.getSelectionModel().getSelectedItem().getText();
         main.myClient.sendChat(chanelName,textInput.getText());
-        printMessage(chanelName,textInput.getText());
+        printMessage(chanelName,"you",textInput.getText());
         textInput.setText("");
     }
     
@@ -82,13 +82,13 @@ public class FXML_ChatController implements Initializable {
             tabPane.getTabs().remove(act);
         myClient.leaveChat(tab);
     }
-    public void printMessage(String tab,String message)
+    public void printMessage(String tab,String username,String message)
     {
         Tab act = getTab(tab);
         if(act == null)
             act =addTab(tab);
         TextArea txtArea = (TextArea)act.getContent();
-        txtArea.appendText("\n"+message);
+        txtArea.appendText("\n"+username+": "+message);
         
         //Scroll to bottom
     }
