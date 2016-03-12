@@ -52,7 +52,7 @@ public class FXML_ChatController implements Initializable {
     {
         Tab[] array= tabPane.getTabs().toArray(new Tab[ tabPane.getTabs().size()]);
         for (Tab array1 : array) 
-            if (array1.getText().equals(tabName))
+            if (array1.getText().toLowerCase().equals(tabName.toLowerCase()))
                 return array1;
         return null;
     }

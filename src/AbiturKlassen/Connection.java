@@ -1,10 +1,13 @@
 package AbiturKlassen;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 /**
  * <p>
@@ -51,10 +54,13 @@ public class Connection extends Thread
         port = s.getLocalPort();
         try
         {
+            
             //Objekt zum Versenden von Nachrichten ueber den Socket erzeugen
-            zumHost = new PrintWriter(s.getOutputStream(), true);
+            zumHost = new PrintWriter(
+                        new BufferedWriter(new OutputStreamWriter(
+                        s.getOutputStream(), "UTF-8")), true);
             //Objekt zum Empfangen von Nachrichten ueber das Socketobjekt erzeugen
-            vomHost = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            vomHost = new BufferedReader(new InputStreamReader(s.getInputStream(), StandardCharsets.UTF_8));
         }
         catch(Exception e)
         {
@@ -68,9 +74,11 @@ public class Connection extends Thread
         {
             s = new Socket(serverName, port);
             //Objekt zum Versenden von Nachrichten ueber den Socket erzeugen
-            zumHost = new PrintWriter(s.getOutputStream(), true);
+            zumHost = new PrintWriter(
+                    new BufferedWriter(new OutputStreamWriter(
+                    s.getOutputStream(), "UTF-8")), true);
             //Objekt zum Empfangen von Nachrichten ueber das Socketobjekt erzeugen
-            vomHost = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            vomHost = new BufferedReader(new InputStreamReader(s.getInputStream(),StandardCharsets.UTF_8));
             return "Verbindung : " + s;
         }
         catch(Exception e)
