@@ -53,14 +53,15 @@ public class TwitchBot extends Application {
         }
     }
 
-    public void openConnectWindow(Stage pStage) {
+    public void openConnectWindow() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML_Connect.fxml"));
-
         try {
             Parent p = fxmlLoader.load();
             FXML_ConnectController controll = (FXML_ConnectController) fxmlLoader.getController();
             controll.setMain(this);
+            controll.initialize(null, null);
             Scene scene = new Scene(p);
+            Stage pStage = new Stage();
             pStage.setScene(scene);
             pStage.show();
         } catch (IOException ex) {
@@ -76,20 +77,7 @@ public class TwitchBot extends Application {
             connect(mySetting.readSetting("Token"));
             return;
         }
-        if (!Desktop.isDesktopSupported()) {
-            return;
-        }
-
-        try {
-            Desktop.getDesktop().browse(new URI("https://api.twitch.tv/kraken/oauth2/authorize"
-                    + "?response_type=token"
-                    + "&client_id=nhtjgrmje2p662nifmn8u4fnp6i16af"
-                    + "&redirect_uri=https://github.com/Orinion/twitchChatBot/"
-                    + "&scope=chat_login"));
-        } catch (Exception ex) {
-        }
-        openConnectWindow(new Stage());
-
+        openConnectWindow();
     }
 
     public void connect(String authcode) 
