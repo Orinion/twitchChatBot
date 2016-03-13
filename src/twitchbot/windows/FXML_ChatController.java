@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
@@ -75,6 +76,9 @@ public class FXML_ChatController implements Initializable {
         Tab addedTab = new Tab(neuerTab);
         TextFlow textFlow = new TextFlow(new Text(">"+neuerTab));
         addedTab.setContent(textFlow);
+        addedTab.setOnClosed((Event event) -> {
+            myClient.leaveChat(neuerTab);
+        });
         tabPane.getTabs().remove(newTab);
         tabPane.getTabs().add(addedTab);
         tabPane.getSelectionModel().select(addedTab);
@@ -121,7 +125,6 @@ public class FXML_ChatController implements Initializable {
         }
         clrUsername.setFont(Font.font(clrUsername.getFont().getName(), FontWeight.BOLD, clrUsername.getFont().getSize()));
         txtFlow.getChildren().addAll(clrUsername,new Text(message));
-        txtFlow.layout();
     }
     public void setMain(TwitchBot main)
     {

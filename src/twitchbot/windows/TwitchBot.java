@@ -12,8 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import twitchbot.ircClient;
-import java.awt.Desktop;
-import java.net.URI;
 import javafx.stage.WindowEvent;
 import twitchbot.Settings;
 
@@ -64,9 +62,7 @@ public class TwitchBot extends Application {
             Stage pStage = new Stage();
             pStage.setScene(scene);
             pStage.show();
-        } catch (IOException ex) {
-
-        }
+        } catch (IOException ex) {}
     }
 
     public void getAuthtoken(String username) {
