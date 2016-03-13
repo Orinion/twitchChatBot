@@ -28,6 +28,8 @@ public class FXML_ChatController implements Initializable {
     private ircClient myClient;
     @FXML
     private TextField textInput;
+     @FXML
+    private TextField newChanelName;
     @FXML
     private TabPane tabPane;
     @FXML
@@ -43,10 +45,8 @@ public class FXML_ChatController implements Initializable {
         @FXML
     void handleNewTab(Event event) 
     {
-        if(!newTab.isSelected())
-            return;
-        this.addTab(textInput.getText());
-        textInput.setText("");
+        this.addTab(newChanelName.getText());
+        newChanelName.setText("");
     }
     private Tab getTab(String tabName)
     {
