@@ -9,7 +9,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
@@ -33,48 +32,53 @@ public class FXML_ChatController implements Initializable {
     private ircClient myClient;
     @FXML
     private TextField textInput;
-     @FXML
+    @FXML
     private TextField newChanelName;
     @FXML
     private TabPane tabPane;
     @FXML
     private Tab newTab;
+
     @FXML
+
     void handleButtonAction(ActionEvent event) {
         String chanelName = tabPane.getSelectionModel().getSelectedItem().getText();
-        main.myClient.sendChat(chanelName,textInput.getText());
-        printMessage(chanelName,"you",textInput.getText());
+        main.myClient.sendChat(chanelName, textInput.getText());
+        printMessage(chanelName, "you", textInput.getText());
         textInput.setText("");
     }
-    
-        @FXML
-    void handleNewTab(Event event) 
-    {
+
+    @FXML
+    void handleNewTab(Event event) {
         String input = newChanelName.getText();
-        if(input.contains("twitch.tv/"))
-            input = input.substring(input.indexOf("twitch.tv/")+"twitch.tv/".length());
+        if (input.contains("twitch.tv/")) {
+            input = input.substring(input.indexOf("twitch.tv/") + "twitch.tv/".length());
+        }
         this.addTab(input);
         newChanelName.setText("");
     }
-    private Tab getTab(String tabName)
-    {
-        Tab[] array= tabPane.getTabs().toArray(new Tab[ tabPane.getTabs().size()]);
-        for (Tab array1 : array) 
-            if (array1.getText().toLowerCase().equals(tabName.toLowerCase()))
+
+    private Tab getTab(String tabName) {
+        Tab[] array = tabPane.getTabs().toArray(new Tab[tabPane.getTabs().size()]);
+        for (Tab array1 : array) {
+            if (array1.getText().toLowerCase().equals(tabName.toLowerCase())) {
                 return array1;
+            }
+        }
         return null;
     }
-    
-    public Tab addTab(String neuerTab)
-    {
-        if(neuerTab.equals(""))
+
+    public Tab addTab(String neuerTab) {
+        if (neuerTab.equals("")) {
             return null;
-        if(getTab(neuerTab)!=null)
+        }
+        if (getTab(neuerTab) != null) {
             return getTab(neuerTab);
+        }
         tabPane.getSelectionModel().clearSelection();
         myClient.joinChat(neuerTab);
         Tab addedTab = new Tab(neuerTab);
-        TextFlow textFlow = new TextFlow(new Text(">"+neuerTab));
+        TextFlow textFlow = new TextFlow(new Text(">" + neuerTab));
         addedTab.setContent(textFlow);
         addedTab.setOnClosed((Event event) -> {
             myClient.leaveChat(neuerTab);
@@ -85,60 +89,62 @@ public class FXML_ChatController implements Initializable {
         tabPane.getTabs().add(newTab);
         return addedTab;
     }
-    public void removeTab(String tab)
-    {
+
+    public void removeTab(String tab) {
         Tab act = getTab(tab);
-        if(act!=null)
+        if (act != null) {
             tabPane.getTabs().remove(act);
+        }
         myClient.leaveChat(tab);
     }
-    public void printMessage(String tab,String username,String message)
-    {
+
+    public void printMessage(String tab, String username, String message) {
         Tab act = getTab(tab);
-        if(act == null)
-            act =addTab(tab);
-        TextFlow txtFlow = (TextFlow)act.getContent();
-        Text clrUsername = new Text("\n"+username+": ");
-        switch(username.charAt(0) % 7)
-        {
+        if (act == null) {
+            act = addTab(tab);
+        }
+        TextFlow txtFlow = (TextFlow) act.getContent();
+        Text clrUsername = new Text("\n" + username + ": ");
+        switch (username.charAt(0) % 7) {
             case 0:
                 clrUsername.setFill(Color.BLACK);
                 break;
             case 1:
                 clrUsername.setFill(Color.RED);
                 break;
-            case 2:  
+            case 2:
                 clrUsername.setFill(Color.BLUE);
                 break;
-            case 3:  
+            case 3:
                 clrUsername.setFill(Color.DARKORANGE);
                 break;
-            case 4:  
+            case 4:
                 clrUsername.setFill(Color.GREEN);
                 break;
-            case 5:  
+            case 5:
                 clrUsername.setFill(Color.BLUEVIOLET);
                 break;
-            case 6:  
+            case 6:
                 clrUsername.setFill(Color.PINK);
-                break;     
+                break;
         }
         clrUsername.setFont(Font.font(clrUsername.getFont().getName(), FontWeight.BOLD, clrUsername.getFont().getSize()));
-        txtFlow.getChildren().addAll(clrUsername,new Text(message));
+        txtFlow.getChildren().addAll(clrUsername, new Text(message));
     }
-    public void setMain(TwitchBot main)
-    {
+
+    public void setMain(TwitchBot main) {
         this.main = main;
         myClient = main.myClient;
         myClient.chatController = this;
         newTab.setClosable(false);
     }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }
