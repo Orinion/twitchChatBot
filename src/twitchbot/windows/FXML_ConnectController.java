@@ -25,20 +25,13 @@ public class FXML_ConnectController implements Initializable {
      */
     private TwitchBot main;
     @FXML
-    private TextField textIP;
-    @FXML
-    private TextField textPort;
-    @FXML
     private TextField textAuthCode;
 
     @FXML
     private void handleButtonAction(ActionEvent event)
     {
-        String ip = textIP.getText();
-        String port = textPort.getText();
-        int portNum =Integer.parseInt(port);
         String authcode = textAuthCode.getText();
-        main.connect(ip,portNum,authcode);
+        main.connect(authcode);
         Stage stage = (Stage)textAuthCode.getScene().getWindow();
         stage.close();
     }

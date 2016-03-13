@@ -59,7 +59,8 @@ public class FXML_ChatController implements Initializable {
     
     public Tab addTab(String neuerTab)
     {
-        
+        if(neuerTab.equals(""))
+            return null;
         if(getTab(neuerTab)!=null)
             return getTab(neuerTab);
         tabPane.getSelectionModel().clearSelection();
