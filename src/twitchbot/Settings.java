@@ -5,16 +5,11 @@
  */
 package twitchbot;
 
-import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -27,11 +22,9 @@ public class Settings {
         this.Filename = Filename;
         try {
             settings.load(new FileInputStream(Filename));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
+        catch (FileNotFoundException ex) {}
+        catch (IOException ex) {}
     }
     public String readSetting(String key)
     {

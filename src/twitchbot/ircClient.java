@@ -1,8 +1,6 @@
 package twitchbot;
 
 import AbiturKlassen.Client;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import twitchbot.windows.FXML_ChatController;
 
@@ -16,9 +14,7 @@ public class ircClient extends Client
         while(!istVerbunden())
             try {
                 Thread.sleep(10);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(ircClient.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } catch (InterruptedException ex) {}
         System.out.println("connected");
         this.send("PASS oauth:"+authToken);
         this.send("NICK "+username.toLowerCase());
