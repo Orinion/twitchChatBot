@@ -131,6 +131,7 @@ public class FXML_ChatController implements Initializable {
         this.main = main;
         myClient = main.myClient;
         myClient.chatController = this;
+        newTab.setClosable(false);
     }
     /**
      * Initializes the controller class.
