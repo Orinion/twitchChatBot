@@ -22,7 +22,8 @@
             </HBox>
          </bottom>
          <center>
-            <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <TabPane fx:id="tabPane" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER">
+                
               <tabs>
                 <Tab fx:id="newTab" text="+">
                      <content>
