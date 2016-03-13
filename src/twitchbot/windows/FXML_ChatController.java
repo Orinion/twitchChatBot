@@ -95,7 +95,7 @@ public class FXML_ChatController implements Initializable {
             act =addTab(tab);
         TextFlow txtFlow = (TextFlow)act.getContent();
         Text clrUsername = new Text("\n"+username+": ");
-        switch(username.charAt(0) % 5)
+        switch(username.charAt(0) % 7)
         {
             case 0:
                 clrUsername.setFill(Color.BLACK);
@@ -104,7 +104,7 @@ public class FXML_ChatController implements Initializable {
                 clrUsername.setFill(Color.RED);
                 break;
             case 2:  
-                clrUsername.setFill(Color.CYAN);
+                clrUsername.setFill(Color.BLUE);
                 break;
             case 3:  
                 clrUsername.setFill(Color.DARKORANGE);
@@ -112,9 +112,16 @@ public class FXML_ChatController implements Initializable {
             case 4:  
                 clrUsername.setFill(Color.GREEN);
                 break;
+            case 5:  
+                clrUsername.setFill(Color.BLUEVIOLET);
+                break;
+            case 6:  
+                clrUsername.setFill(Color.PINK);
+                break;     
         }
         clrUsername.setFont(Font.font(clrUsername.getFont().getName(), FontWeight.BOLD, clrUsername.getFont().getSize()));
         txtFlow.getChildren().addAll(clrUsername,new Text(message));
+        txtFlow.layout();
     }
     public void setMain(TwitchBot main)
     {
