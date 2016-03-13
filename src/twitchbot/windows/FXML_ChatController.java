@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
@@ -79,7 +80,8 @@ public class FXML_ChatController implements Initializable {
         myClient.joinChat(neuerTab);
         Tab addedTab = new Tab(neuerTab);
         TextFlow textFlow = new TextFlow(new Text(">" + neuerTab));
-        addedTab.setContent(textFlow);
+        ScrollPane sb = new ScrollPane(textFlow);
+        addedTab.setContent(sb);
         addedTab.setOnClosed((Event event) -> {
             myClient.leaveChat(neuerTab);
         });
@@ -103,7 +105,8 @@ public class FXML_ChatController implements Initializable {
         if (act == null) {
             act = addTab(tab);
         }
-        TextFlow txtFlow = (TextFlow) act.getContent();
+        ScrollPane spane = (ScrollPane) act.getContent();
+        TextFlow txtFlow = (TextFlow)spane.getContent();
         Text clrUsername = new Text("\n" + username + ": ");
         switch (username.charAt(0) % 7) {
             case 0:
@@ -130,6 +133,7 @@ public class FXML_ChatController implements Initializable {
         }
         clrUsername.setFont(Font.font(clrUsername.getFont().getName(), FontWeight.BOLD, clrUsername.getFont().getSize()));
         txtFlow.getChildren().addAll(clrUsername, new Text(message));
+        spane.setVvalue(1.0);
     }
 
     public void setMain(TwitchBot main) {

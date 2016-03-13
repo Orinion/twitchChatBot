@@ -47,8 +47,7 @@ public class TwitchBot extends Application {
             Scene scene = new Scene(p);
             pStage.setScene(scene);
             pStage.show();
-        } catch (IOException ex) {
-        }
+        } catch (IOException ex) {}
     }
 
     public void openConnectWindow() {
