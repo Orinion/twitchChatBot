@@ -13,8 +13,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import twitchbot.ircClient;
 
 /**
@@ -45,7 +49,10 @@ public class FXML_ChatController implements Initializable {
         @FXML
     void handleNewTab(Event event) 
     {
-        this.addTab(newChanelName.getText());
+        String input = newChanelName.getText();
+        if(input.contains("twitch.tv/"))
+            input = input.substring(input.indexOf("twitch.tv/")+"twitch.tv/".length());
+        this.addTab(input);
         newChanelName.setText("");
     }
     private Tab getTab(String tabName)
@@ -66,10 +73,8 @@ public class FXML_ChatController implements Initializable {
         tabPane.getSelectionModel().clearSelection();
         myClient.joinChat(neuerTab);
         Tab addedTab = new Tab(neuerTab);
-        TextArea newTxtArea = new TextArea(">"+neuerTab);
-        newTxtArea.setEditable(false);
-        newTxtArea.wrapTextProperty().set(true);
-        addedTab.setContent(newTxtArea);
+        TextFlow textFlow = new TextFlow(new Text(">"+neuerTab));
+        addedTab.setContent(textFlow);
         tabPane.getTabs().remove(newTab);
         tabPane.getTabs().add(addedTab);
         tabPane.getSelectionModel().select(addedTab);
@@ -88,10 +93,28 @@ public class FXML_ChatController implements Initializable {
         Tab act = getTab(tab);
         if(act == null)
             act =addTab(tab);
-        TextArea txtArea = (TextArea)act.getContent();
-        txtArea.appendText("\n"+username+": "+message);
-        
-        //Scroll to bottom
+        TextFlow txtFlow = (TextFlow)act.getContent();
+        Text clrUsername = new Text("\n"+username+": ");
+        switch(username.charAt(0) % 5)
+        {
+            case 0:
+                clrUsername.setFill(Color.BLACK);
+                break;
+            case 1:
+                clrUsername.setFill(Color.RED);
+                break;
+            case 2:  
+                clrUsername.setFill(Color.CYAN);
+                break;
+            case 3:  
+                clrUsername.setFill(Color.DARKORANGE);
+                break;
+            case 4:  
+                clrUsername.setFill(Color.GREEN);
+                break;
+        }
+        clrUsername.setFont(Font.font(clrUsername.getFont().getName(), FontWeight.BOLD, clrUsername.getFont().getSize()));
+        txtFlow.getChildren().addAll(clrUsername,new Text(message));
     }
     public void setMain(TwitchBot main)
     {
