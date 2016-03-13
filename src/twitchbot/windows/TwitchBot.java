@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import twitchbot.ircClient;
 import java.awt.Desktop;
 import java.net.URI;
+import javafx.scene.image.Image;
 import javafx.stage.WindowEvent;
 import twitchbot.Settings;
 
@@ -93,6 +94,7 @@ public class TwitchBot extends Application {
             Scene scene = new Scene(p);
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.getIcons().add(new Image("http://www.ggcircuit.com/wp-content/uploads/Twitch-Icon.png"));
             stage.show();
             stage.setTitle(Username);
             stage.setOnCloseRequest((WindowEvent we) -> {

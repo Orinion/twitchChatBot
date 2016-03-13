@@ -80,7 +80,7 @@ public class FXML_ChatController implements Initializable {
         Tab addedTab = new Tab(neuerTab);
         TextFlow textFlow = new TextFlow(new Text(">" + neuerTab));
         addedTab.setContent(textFlow);
-        tabPane.getTabs().remove(newTab);
+//        tabPane.getTabs().remove(newTab);
         tabPane.getTabs().add(addedTab);
         tabPane.getSelectionModel().select(addedTab);
         tabPane.getTabs().add(newTab);
